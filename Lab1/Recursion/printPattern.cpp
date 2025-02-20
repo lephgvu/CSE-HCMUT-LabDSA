@@ -5,12 +5,12 @@ using namespace std;
 void printPattern(int n) 
 { 
     if(n <= 0){
-        cout<<n;
+        cout << n;
         return;
     }
-    cout<<n<<" ";
+    cout << n <<" ";
     printPattern(n-5);
-    cout<<" "<<n;
+    cout <<" "<< n;
 }
 
 int main(){
