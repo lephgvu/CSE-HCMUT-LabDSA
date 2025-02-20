@@ -3,8 +3,17 @@
 using namespace std;
 
 class IntSLinkedList {
+
 public:
-    class Node;
+class Node {
+public:
+    int data;
+    Node* next;
+    
+public:
+    Node(): next(nullptr) {};
+    Node(int data) : data(data), next(nullptr) {};
+};
 
 private:
     Node* head;
@@ -14,13 +23,12 @@ private:
 public:
     IntSLinkedList(): head(nullptr), tail(nullptr), count(0) {};
     void add(int element) {
+        Node* tmp = new Node(element);
         if(this->empty()) {
-            Node* tmp = new Node(element);
             this->head = this->tail = tmp;
             count++;
         }
         else {
-            Node* tmp = new Node(element);
             this->tail->next = tmp;
             this->tail = tmp;
             count++;
@@ -28,7 +36,7 @@ public:
     }
     
     void add(int index, int element) {
-        if(index < 0 || index > this->count)
+        if(index < 0 || index >= this->count)
             throw out_of_range("Index is out of range");
         
         if(this->empty()) return this->add(element);
@@ -71,21 +79,42 @@ public:
 
     int size(){ return this->count; }
 
-    int get(int index) { return -1; }
-
-
-
-    
-public:
-    class Node {
-    public:
-        int data;
-        Node* next;
+    int get(int index) { 
+        if(index < 0 || index > this->count)
+            throw out_of_range("Index is out of range");
         
-    public:
-        Node(): next(nullptr) {};
-        Node(int data) : data(data), next(nullptr) {};
-    };
+        Node* current = this->head;
+        for(int i = 0; i < index; i++){
+            current = current->next;
+        }
+            
+        return current->data; 
+    }
+
+    void set(int index, int element){
+        if(index < 0 || index > this->count)
+            throw out_of_range("Index is out of range");
+        
+        Node* current = this->head;
+        for(int i = 0; i < index; i++){
+            current = current->next;
+        }
+            
+        current->data = element;
+    }
+
+    int indexOf(int item){
+        Node* tmp = this->head;
+        for(int i = 0; i < this->count; i++){
+            if(tmp->data == item) return i;
+            tmp = tmp->next;
+        }
+        return -1;
+    }
+    
+    bool contains(int item){
+        return this->indexOf(item) >= 0;
+    }
 };
 
 int main(){
