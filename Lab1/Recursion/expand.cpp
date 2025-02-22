@@ -3,7 +3,7 @@
 using namespace std;
 
 string expand(string s) {
-
+    
 }
 
 int main(){
