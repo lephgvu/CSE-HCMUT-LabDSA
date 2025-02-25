@@ -35,12 +35,7 @@ private:
     Color color;
 
 public:
-    CarToy(double price, Color color) : Toy(price)
-    {
-        /*
-         * STUDENT ANSWER
-         */
-    }
+    CarToy(double price, Color color) : Toy(price), color(color) {}
 
     void printType()
     {
@@ -56,12 +51,7 @@ private:
     Size size;
 
 public:
-    PuzzleToy(double price, Size size) : Toy(price)
-    {
-        /*
-         * STUDENT ANSWER
-         */
-    }
+    PuzzleToy(double price, Size size) : Toy(price), size(size) {}
 
     void printType()
     {
@@ -78,32 +68,24 @@ private:
     int numberOfItems;
 
 public:
-    ToyBox()
-    {
-        /*
-         * STUDENT ANSWER
-         * TODO: set zero numberOfItems and nullptr toyBox
-         */
+    ToyBox() {
+        this->numberOfItems = 0;
+
+        for(int i = 0; i < 5; i++) {
+            toyBox[i] = nullptr;
+        }
     }
     
-    int addItem(const CarToy& carToy)
-    {
-        /*
-         * STUDENT ANSWER
-         * TODO: function add a new Car toy to the box.
-                 If successfully added, the function returns the current number of toys in the box. 
-                 If the box is full, return -1.
-         */
+    int addItem(const CarToy& carToy) {
+        if (numberOfItems >= 5) return -1; 
+        toyBox[numberOfItems] = new CarToy(carToy); 
+        return ++numberOfItems; 
     }
-    
-    int addItem(const PuzzleToy& puzzleToy)
-    {
-        /*
-         * STUDENT ANSWER
-         * TODO: function add a new Puzzle toy to the box.
-                 If successfully added, the function returns the current number of toys in the box. 
-                 If the box is full, return -1.
-         */
+
+    int addItem(const PuzzleToy& puzzleToy) {
+        if (numberOfItems >= 5) return -1; 
+        toyBox[numberOfItems] = new PuzzleToy(puzzleToy); 
+        return ++numberOfItems; 
     }
     
     void printBox()
@@ -111,15 +93,22 @@ public:
         for (int i = 0; i < numberOfItems; i++)
             toyBox[i]->printType();
     }
+
+    // Destructor: Giải phóng bộ nhớ
+    ~ToyBox() {
+        for (int i = 0; i < numberOfItems; i++) {
+            delete toyBox[i];
+        }
+    }
 };
 
 int main(){
-    CarToy car(20000,red);
-    PuzzleToy puzzle(30000,small);
-    car.printType(); //This is a car toy
-    puzzle.printType();  //This is a puzzle toy
+    // CarToy car(20000,red);
+    // PuzzleToy puzzle(30000,small);
+    // car.printType(); //This is a car toy
+    // puzzle.printType();  //This is a puzzle toy
     
-    //------------------------------------
+    // //------------------------------------
     CarToy car(20000,red);
     PuzzleToy puzzle(30000,small);
 
@@ -128,9 +117,9 @@ int main(){
     box.addItem(puzzle);
     box.printBox(); //This is a car toy, This is a puzzle toy
 
-    //------------------------------------
-    Toy* toy = new CarToy(30000,red);
-    toy->printType(); //This is a car toy
+    // //------------------------------------
+    // Toy* toy = new CarToy(30000,red);
+    // toy->printType(); //This is a car toy
 
     return 0;
 }
