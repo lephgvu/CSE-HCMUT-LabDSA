@@ -1,4 +1,6 @@
 #include <iostream>
+#include <math.h>
+
 using namespace std;
 
 class Point
@@ -7,55 +9,33 @@ private:
     double x, y;
 
 public:
-    Point()
-    {
-        /*  
-         * STUDENT ANSWER   
-         * TODO: set zero x-y coordinate
-         */
-    }
+    Point(): x(0), y(0) {};
 
-    Point(double x, double y)
-    {
-        /*  
-         * STUDENT ANSWER
-         */
-    }
+    Point(double x, double y): x(x), y(y) {};
 
     void setX(double x)
     {
-        /*  
-         * STUDENT ANSWER
-         */
+        this->x = x;
     }
 
     void setY(double y)
     {
-        /*  
-         * STUDENT ANSWER
-         */
+        this->y = y;
     }
 
     double getX() const
     {
-        /*  
-         * STUDENT ANSWER
-         */
+        return this->x;
     }
 
     double getY() const
     {
-        /*  
-         * STUDENT ANSWER
-         */
+        return this->y;
     }
 
     double distanceToPoint(const Point& pointA)
     {
-        /*  
-         * STUDENT ANSWER   
-         * TODO: calculate the distance from this point to point A in the coordinate plane
-         */
+        double res = sqrt(pow(this->x - pointA.getX(),2) + pow(this->y - pointA.getY(),2));
     }
 };
 
@@ -68,52 +48,37 @@ private:
 public:
     Circle()
     {
-        /*  
-         * STUDENT ANSWER   
-         * TODO: set zero center's x-y and radius
-         */
+        this->center.setX(0);
+        this->center.setY(0);
     }
 
-    Circle(Point center, double radius)
-    {
-        /*  
-         * STUDENT ANSWER
-         */
-    }
+    Circle(Point center, double radius): center(center), radius(radius) {}
 
     Circle(const Circle &circle)
     {
-        /*  
-         * STUDENT ANSWER
-         */
+        this->center = circle.getCenter();
+        this->radius = circle.getRadius();
     }
     
     void setCenter(Point point)
     {
-        /*  
-         * STUDENT ANSWER
-         */
+        this->center.setX(point.getX());
+        this->center.setY(point.getY());
     }
 
     void setRadius(double radius)
     {
-        /*  
-         * STUDENT ANSWER
-         */
+        this->radius = radius;
     }
 
     Point getCenter() const
     {
-        /*  
-         * STUDENT ANSWER
-         */
+        return this->center;
     }
 
     double getRadius() const
     {
-        /*  
-         * STUDENT ANSWER
-         */
+        return this->radius;
     }
     
     void printCircle()
