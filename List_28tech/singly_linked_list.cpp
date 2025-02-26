@@ -37,7 +37,7 @@ public:
     
     void add(int index, int element) {
         if(index < 0 || index >= this->count)
-            throw out_of_range("Index is out of range");
+            throw std::out_of_range("Index is out of range");
         
         if(this->empty()) return this->add(element);
         
@@ -50,7 +50,6 @@ public:
             tmp->next = this->head;
             this->head = tmp;
             count++;
-            return;
         }
 
         //Add middle
@@ -62,6 +61,7 @@ public:
         tmp->next = prev->next;
         prev->next = tmp;
         count++;
+
         return;
     }
 
@@ -121,3 +121,4 @@ int main(){
 
     return 0;
 }
+

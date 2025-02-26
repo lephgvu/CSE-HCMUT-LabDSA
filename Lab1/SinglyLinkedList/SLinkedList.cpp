@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string.h>
 #include <math.h>
 using namespace std;
 
@@ -6,22 +7,35 @@ template <class T>
 class SLinkedList {
 public:
     class Node; // Forward declaration
+
 protected:
     Node* head;
     Node* tail;
     int count;
+
 public:
-    SLinkedList();
+    SLinkedList(): head(NULL), tail(NULL), count(0);
     ~SLinkedList();
     void    add(T e);
     void    add(int index, T e);
     int     size();
+    bool    empty();
+    int     size();
+    void    clear();
+    T       get(int index);
+    void    set(int index, T e);
+    int     indexOf(T item);
+    bool    contains(T item);
+    T       removeAt(int index);
+    bool    removeItem(T item);
+
 public:
     class Node {
     private:
         T data;
         Node* next;
         friend class SLinkedList<T>;
+
     public:
         Node() {
             next = 0;
@@ -29,7 +43,7 @@ public:
         Node(Node* next) {
             this->next = next;
         }
-        Node(T data, Node* next) {
+        Node(T data, Node* next = nullptr) {
             this->data = data;
             this->next = next;
         }
@@ -38,20 +52,111 @@ public:
 
 template <class T>
 void SLinkedList<T>::add(const T& e) {
-    /* Insert an element into the end of the list. */
-    
+    Node* tmp = new Node(e, nullptr);
+    if(this->count == 0) {
+        this->head = this->tail = tmp;
+        count++;
+    }
+    else {
+        this->tail->next = tmp;
+        this->tail = tmp;
+        count++;
+    }
 }
 
 template<class T>
 void SLinkedList<T>::add(int index, const T& e) {
-    /* Insert an element into the list at given index. */ 
+    if(index == this->count || (this->count == 0 && index == 0)) {
+        this->add(e);    
+    } 
+    else if(index == 0) {
+        Node* tmp = new Node(e, nullptr);
+        tmp->next = this->head;
+        this->head = tmp;
+        count++;
+    }
     
+    else {
+        Node* tmp = new Node(e, nullptr);
+        Node* prev = head;
+        for(int i = 0; i < index - 1; i++) {
+            prev = prev->next;    
+        }
+        tmp->next = prev->next;
+        prev->next = tmp;
+        count++;
+    }
 }
 
 template<class T>
 int SLinkedList<T>::size() {
-    /* Return the length (size) of list */ 
-    return 0;
+    return this->count;
+}
+
+template<class T>
+T SLinkedList<T>::get(int index) {
+    if(index < 0 || index >= this->count) {
+        throw std::out_of_range("Index is out of range");
+    }
+    else {
+        Node* current = this->head;
+        for(int i = 0; i < index; i++){
+            current = current->next;
+        }
+        return current->data;
+    }
+}
+
+template <class T>
+void SLinkedList<T>::set(int index, const T& e) {
+    if(index < 0 || index >= this->count) {
+        throw std::out_of_range("Index is out of range");
+    }
+    else{
+        Node* tmp = this->head;
+        for(int i = 0; i < index; i++){
+            tmp = tmp->next;
+        }
+        tmp->data = e;
+    }
+}
+
+template<class T>
+bool SLinkedList<T>::empty() {
+    return this->count == 0;
+}
+
+template<class T>
+int SLinkedList<T>::indexOf(const T& item) {
+    Node* tmp = this->head;
+    for(int i = 0; i < count; i++) {
+        if(tmp->data == item) return i;
+        tmp = tmp->next;
+    }
+    return -1;
+}
+
+template<class T>
+bool SLinkedList<T>::contains(const T& item) {
+    return this->indexOf(item) >= 0;
+}
+
+template <class T>
+T SLinkedList<T>::removeAt(int index)
+{
+    /* Remove element at index and return removed value */
+}
+
+template <class T>
+bool SLinkedList<T>::removeItem(const T& item)
+{
+    /* Remove the first apperance of item in list and return true, otherwise return false */
+    
+}
+
+template<class T>
+void SLinkedList<T>::clear(){
+    /* Remove all elements in list */
 }
 
 int main(){
@@ -78,3 +183,4 @@ int main(){
     
     return 0;
 }
+
