@@ -144,56 +144,62 @@ bool SLinkedList<T>::contains(const T& item) {
 template <class T>
 T SLinkedList<T>::removeAt(int index)
 {
-    if(index < 0 || index > this->count)
-            throw out_of_range("Index is out of range");
+    T value = 0;
+    if(index < 0 || index >= this->count)
+        throw out_of_range("Index is out of range");
 
     else if(this->count == 1) {
         Node* tmp = this->head;
         this->head = this->tail = nullptr;
-        T value = tmp->data;
+        value = tmp->data;
         delete tmp;
         count--;
-        return value;
     }
+
     else if(index == 0) {
         Node* tmp = this->head;
         head = head->next;
         tmp->next = nullptr;
-        T value = tmp->data;
+        value = tmp->data;
         delete tmp;
         count--;
-        return value;
     }
+
     else if(index == this->count - 1) {
         Node* tmp = this->head;
-        for(int i = 0; i < index - 1; i++) tmp = tmp->next;
+        for(int i = 0; i < index - 1; i++) 
+            tmp = tmp->next;
+        
         tmp->next = nullptr;
-        T value = tail->data;
+        value = tail->data;
         delete this->tail;
         this->tail = tmp;
-        return value;
+        count--;
     }
+
     else{
         Node* prev = this->head;
-        for(int i = 0; i < index - 1; i++) prev = prev->next;
+        for(int i = 0; i < index - 1; i++) 
+            prev = prev->next;
+
         Node* cur = prev->next;
         prev->next = cur->next;
+        value = cur->data;
         cur->next = nullptr;
-        T value = cur->data;
         delete cur;
         count--;
-        return value;
     }
+    return value;
 }
 
 template <class T>
 bool SLinkedList<T>::removeItem(const T& item)
 {
-    Node* cur = head;
+    Node* tmp = this->head;
     for (int i = 0; i < this->count; i++) {
-        
-        if (cur->data == item) { removeAt(i); return true; }
-        cur = cur->next;
+        if (tmp->data == item) 
+            return this->removeAt(i)>=0; 
+        tmp = tmp->next;
     }
     return false;
 }
@@ -201,12 +207,12 @@ bool SLinkedList<T>::removeItem(const T& item)
 template<class T>
 void SLinkedList<T>::clear(){
     for (int i = 0; i < this->count; i++) {
-        Node* temp = head;
+        Node* tmp = this->head;
         head = head->next;
-        delete temp;
+        delete tmp;
     }
-    this->head = NULL;
-    this->tail = NULL;
+    this->head = nullptr;
+    this->tail = nullptr;
     this->count = 0;
 }
 
