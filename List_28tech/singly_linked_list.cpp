@@ -96,7 +96,7 @@ public:
             int value = tail->data;
             delete this->tail;
             this->tail = tmp;
-
+            count--;
             return value;
         }
 
@@ -111,24 +111,23 @@ public:
             int value = cur->data;
             delete cur;
             count--;
-
             return value;
         }
     }
 
     bool removeItem(int item) { 
         Node* cur = head;
-    for (int i = 0; i < this->count; i++) {
-        
-        if (cur->data == item) { return this->removeAt(i)>=0; }
-        cur = cur->next;
-    }
-    return false;
-    }
+        for (int i = 0; i < this->count; i++) {
 
-    bool empty(){ return this->count == 0; }
-
+            if (cur->data == item) { return this->removeAt(i)>=0; }
+            cur = cur->next;
+        }
+        return false;
+    }
+    
     int size(){ return this->count; }
+    
+    bool empty(){ return this->count == 0; }
 
     int get(int index) { 
         if(index < 0 || index > this->count)

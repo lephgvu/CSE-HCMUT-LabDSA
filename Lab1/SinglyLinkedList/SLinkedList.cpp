@@ -15,18 +15,18 @@ protected:
 
 public:
     SLinkedList(): head(NULL), tail(NULL), count(0);
-    ~SLinkedList();
+    ~SLinkedList() { }
     void add(const T& e);
     void add(int index, const T& e);
-    int  size();
+    int size();
     bool empty();
-    int  size();
+    int size();
     void clear();
-    T    get(int index);
+    T get(int index);
     void set(int index, const T& e);
-    int  indexOf(T item);
+    int indexOf(const T& item);
     bool contains(T item);
-    T    removeAt(int index);
+    T removeAt(int index);
     bool removeItem(const T& item);
 
 public:
@@ -96,7 +96,7 @@ int SLinkedList<T>::size() {
 template<class T>
 T SLinkedList<T>::get(int index) {
     if(index < 0 || index >= this->count) {
-        throw std::out_of_range("Index is out of range");
+        throw out_of_range("Index is out of range");
     }
     else {
         Node* current = this->head;
@@ -130,7 +130,8 @@ template<class T>
 int SLinkedList<T>::indexOf(const T& item) {
     Node* tmp = this->head;
     for(int i = 0; i < count; i++) {
-        if(tmp->data == item) return i;
+        if(tmp->data == item) 
+            return i;
         tmp = tmp->next;
     }
     return -1;
