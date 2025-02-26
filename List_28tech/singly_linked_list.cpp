@@ -39,10 +39,10 @@ public:
         if(index < 0 || index >= this->count)
             throw std::out_of_range("Index is out of range");
         
-        if(this->empty()) return this->add(element);
+        if(this->empty()) this->add(element);
         
         //Add depend
-        if(index == this->count) return this->add(element);
+        if(index == this->count) this->add(element);
 
         //Add prepend
         if(index == 0) {
@@ -61,18 +61,69 @@ public:
         tmp->next = prev->next;
         prev->next = tmp;
         count++;
-
-        return;
     }
 
     int removeAt(int index) { 
-        
-        return 0; 
+        if(index < 0 || index > this->count)
+            throw out_of_range("Index is out of range");
+
+        else if(this->count == 1) {
+            Node* tmp = this->head;
+            this->head = this->tail = nullptr;
+
+            int value = tmp->data;
+            delete tmp;
+            count--;
+            return value;
+        }
+
+        else if(index == 0) {
+            Node* tmp = this->head;
+            head = head->next;
+            tmp->next = nullptr;
+
+            int value = tmp->data;
+            delete tmp;
+            count--;
+            return value;
+        }
+
+        else if(index == this->count - 1) {
+            Node* tmp = this->head;
+            for(int i = 0; i < index - 1; i++) tmp = tmp->next;
+
+            tmp->next = nullptr;
+            int value = tail->data;
+            delete this->tail;
+            this->tail = tmp;
+
+            return value;
+        }
+
+        else{
+            Node* prev = this->head;
+            for(int i = 0; i < index - 1; i++) prev = prev->next;
+
+            Node* cur = prev->next;
+            prev->next = cur->next;
+            cur->next = nullptr;
+
+            int value = cur->data;
+            delete cur;
+            count--;
+
+            return value;
+        }
     }
 
     bool removeItem(int item) { 
-    
-        return false; 
+        Node* cur = head;
+    for (int i = 0; i < this->count; i++) {
+        
+        if (cur->data == item) { return this->removeAt(i)>=0; }
+        cur = cur->next;
+    }
+    return false;
     }
 
     bool empty(){ return this->count == 0; }
