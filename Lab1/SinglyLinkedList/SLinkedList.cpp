@@ -28,7 +28,7 @@ public:
     bool contains(T item);
     T removeAt(int index);
     bool removeItem(const T& item);
-
+    string toString();
 public:
     class Node {
     private:
@@ -217,6 +217,18 @@ void SLinkedList<T>::clear(){
     this->count = 0;
 }
 
+template<class T>
+string SLinkedList<T>::toString() {
+    string result;
+    Node* current = head;
+    while (current) {
+    //! chuyển đổi số thành chuỗi và lưu lại
+    result += to_string(current->data) + " ";
+    current = current->next;
+    }
+    return result;
+}
+
 int main(){
     SLinkedList<int> list;
     int size = 10;
@@ -229,15 +241,15 @@ int main(){
     //[0,1,2,3,4,5,6,7,8,9]
 
     //----------------------------
-    SLinkedList<int> list;
-    int size = 10;
+    // SLinkedList<int> list;
+    // int size = 10;
 
-    for(int index = 0; index < size; index++){
-        list.add(0, index);
-    }
+    // for(int index = 0; index < size; index++){
+    //     list.add(0, index);
+    // }
 
-    cout << list.toString();
-    //[9,8,7,6,5,4,3,2,1,0]
+    // cout << list.toString();
+    // //[9,8,7,6,5,4,3,2,1,0]
     
     return 0;
 }

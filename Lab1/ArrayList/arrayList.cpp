@@ -61,17 +61,15 @@ template<class T>
 bool ArrayList<T>::removeItem(T item){
     for (int i = 0; i < this->count; i++) {
         if (data[i] == item) {
-            this->removeAt(i);
+            // Shift elements to the left to fill the gap
+            for (int j = i; j < count - 1; j++) {
+                data[j] = data[j + 1];
+            }
+
+            this->count--;
             return true;
-            //for (int j = i; j < count - 1; j++) {
-            //    data[j] = data[j + 1];
-            //}
-        
-            //this->count--; 
-            //return true; 
         }
     }
-
     return false; 
 }
 
@@ -79,8 +77,8 @@ template<class T>
 void ArrayList<T>::clear(){
     if(this->data != NULL) delete[] this->data;
     
+    this->data = new T[5];
     this->capacity = 5;
-    this->data = new T[this->capacity];
     this->count = 0;
 }
 

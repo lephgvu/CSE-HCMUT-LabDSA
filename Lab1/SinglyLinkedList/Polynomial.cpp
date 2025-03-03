@@ -45,12 +45,34 @@ public:
 };
 
 void Polynomial::insertTerm(const Term& term) {
-    // STUDENT ANSWER
+    insertTerm(term.coeff, term.exp);
 }
 
 void Polynomial::insertTerm(double coeff, int exp) {
-    // STUDENT ANSWER
+    if (coeff == 0) return; // Không chèn hệ số 0
+
+    SLinkedList<Term>::Iterator it = this->terms->begin();
+    int index = 0; // Đếm vị trí của phần tử trong danh sách
+
+    while (it != this->terms->end() && (*it).exp > exp) {
+        ++it;
+        ++index;
+    }
+
+    // Nếu tìm thấy một phần tử có cùng exp, cộng hệ số
+    if (it != this->terms->end() && (*it).exp == exp) {
+        double newCoeff = (*it).coeff + coeff;
+        if (newCoeff == 0) {
+            this->terms->removeAt(index); // Nếu hệ số mới bằng 0, xóa phần tử
+        } else {
+            *it = Term(newCoeff, exp); // Cập nhật hệ số mới
+        }
+    } else {
+        // Chèn phần tử mới vào đúng vị trí
+        this->terms->addAt(index, Term(coeff, exp));
+    }
 }
+
 
 int main(){
     Polynomial *poly = new Polynomial();
@@ -68,23 +90,23 @@ int main(){
     // Term: (6 2)
     // Term: (-1 0)
     // ]
-//----------------------------
-    int n = 5;
-    int coeff[] = { 1, 2, 3, 4, 5 };
-    int exp[] = { 1, 2, 3, 4, 5 };
+// //----------------------------
+//     int n = 5;
+//     int coeff[] = { 1, 2, 3, 4, 5 };
+//     int exp[] = { 1, 2, 3, 4, 5 };
 
-    Polynomial p1;
-    for (int i = 0; i < n; ++i)
-        p1.insertTerm(coeff[i], exp[i]);
+//     Polynomial p1;
+//     for (int i = 0; i < n; ++i)
+//         p1.insertTerm(coeff[i], exp[i]);
 
-    p1.print();
-    // [
-    // Term: (5 5)
-    // Term: (4 4)
-    // Term: (3 3)
-    // Term: (2 2)
-    // Term: (1 1)
-    // ]
+//     p1.print();
+//     // [
+//     // Term: (5 5)
+//     // Term: (4 4)
+//     // Term: (3 3)
+//     // Term: (2 2)
+//     // Term: (1 1)
+//     // ]
 
     return 0;
 }
