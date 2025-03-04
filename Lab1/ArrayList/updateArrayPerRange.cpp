@@ -5,11 +5,11 @@ using namespace std;
 
 vector<int> updateArrayPerRange(vector<int> &nums, vector<vector<int>> &operations)
 {   
-    for(auto op : operations) 
-    {
-        int L = op[0], R = op[1], X = op[2]; 
-        for (int j = L; j <= R; j++) 
-            nums[j] += X;
+    for(auto op : operations) {
+        int op[0] = L, op[1] = R, op[2] = X;
+        for(int i = L; i <= R; i++) {
+            nums[i] += X;
+        }
     }
     return nums;
 }

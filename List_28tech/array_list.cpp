@@ -33,20 +33,20 @@ private:
 
 public:
     IntArrayList();
-    virtual ~IntArrayList();
-    virtual void add(int element);
-    virtual void add(int index, int element);
-    virtual int removeAt(int index);
-    virtual bool removeItem(int item);
-    virtual bool empty();
-    virtual int size();
-    virtual void clear();
-    virtual int get(int index);
-    virtual void set(int index, int element);
-    virtual int indexOf(int item);
-    virtual bool contains(int item);
-    virtual string toString();
-    virtual void dump();
+    ~IntArrayList();
+    void add(int element);
+    void add(int index, int element);
+    int removeAt(int index);
+    bool removeItem(int item);
+    bool empty();
+    int size();
+    void clear();
+    int get(int index);
+    void set(int index, int element);
+    int indexOf(int item);
+    bool contains(int item);
+    string toString();
+    void dump();
 }; 
 
 IntArrayList::IntArrayList() {
