@@ -4,13 +4,15 @@ using namespace std;
 
 template<class T>
 int ArrayList<T>::get(int index){
-    if(index < 0 || index > this->count) throw out_of_range("Index_out_of_range");
+    if(index < 0 || index > this->count) 
+        throw out_of_range("Index_out_of_range");
     return data[index];
 }
 
 template<class T>
 void ArrayList<T>::set(int index, T item){
-    if(index < 0 || index > this->count) throw out_of_range("Index_out_of_range");
+    if(index < 0 || index > this->count) 
+            throw out_of_range("Index_out_of_range");
     data[index] = item;
 }
 
