@@ -14,13 +14,13 @@ using namespace std;
 //     return n == 0;
 // }
 
-// void push(int x){
+// void enQueue(int x){
 //     if(n = maxN) return;
 //     a[n] = x; 
 //     ++n;
 // }
 
-// void pop(){
+// void deQueue(){
 //     if(n == 0) return;
 //     for(int i = 0; i < n - 1; i++){
 //         a[i] = a[i + 1];
@@ -31,6 +31,12 @@ using namespace std;
 // int front(){
 //     return a[0];
 // }
+
+// int rear(){
+//     return a[n - 1];
+// }   
+
+
 
 
 // --------------------------------------------Cai dat hang doi bang DSLK --------------------------------------------

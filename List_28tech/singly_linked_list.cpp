@@ -36,14 +36,13 @@ public:
     }
     
     void add(int index, int element) {
+        //Check indexindex
         if(index < 0 || index >= this->count)
             throw std::out_of_range("Index is out of range");
         
+        //Empty list
         if(this->empty()) this->add(element);
         
-        //Add depend
-        if(index == this->count) this->add(element);
-
         //Add prepend
         if(index == 0) {
             Node* tmp = new Node(element);
@@ -51,6 +50,9 @@ public:
             this->head = tmp;
             count++;
         }
+
+        //Add depend
+        if(index == this->count) this->add(element);
 
         //Add middle
         Node* tmp = new Node(element);

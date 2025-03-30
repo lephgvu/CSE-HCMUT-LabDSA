@@ -22,7 +22,7 @@ using namespace std;
 //     return n;
 // }
 
-// -----------------------------Cai dat ngan xep bang DSLK------------------------------------------------------
+// -----------------------------Cai dat ngan xep bang DSLKD------------------------------------------------------
 struct node{
     int data;
     struct node *next;

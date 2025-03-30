@@ -156,7 +156,8 @@ void IntArrayList::dump(){
 }
 
 void IntArrayList::checkIndex(int index){
-    if(index < 0 || index > this->count) throw out_of_range("Index_out_of_range");
+    if(index < 0 || index >= this->count) 
+        throw out_of_range("Index_out_of_range");
 }
 
 void IntArrayList::ensureCapacity(int capacity){
