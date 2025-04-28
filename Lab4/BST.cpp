@@ -58,5 +58,13 @@ public:
     }
 
     // STUDENT ANSWER BEGIN
+    // STUDENT ANSWER BEGIN
+    // You can define other functions here to help you.
+    
+    void BFS()
+    {
+    
+    }
+    // STUDENT ANSWER END
     // STUDENT ANSWER END
 };
